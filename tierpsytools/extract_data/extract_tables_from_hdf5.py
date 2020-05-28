@@ -45,7 +45,7 @@ def copy_table(table_names, src_fname, dst_fname):
     if not dst_fname.parent.exists():
         dst_fname.parent.mkdir(parents=True, exist_ok=True)
     with h5py.File(src_fname, 'r') as fids:
-        with h5py.File(dst_fname, 'r+') as fidd:
+        with h5py.File(dst_fname, 'a') as fidd:
             for table_name in table_names:
                 fids.copy(table_name, fidd['/'])
 
@@ -84,9 +84,15 @@ if __name__ == '__main__':
     # search_string = '*.hdf5'
     # search_string = '*prestim*/*.hdf5'
 
-    src = Path('/Volumes/Seagate Bac/SyngentaScreen/Results')
-    dst = Path('/Volumes/Seagate Bac/SyngentaScreen/Results_for_Ziwei')
+    # src = Path('/Volumes/Seagate Bac/SyngentaScreen/Results')
+    # dst = Path('/Volumes/Seagate Bac/SyngentaScreen/Results_for_Ziwei')
+    # table_name = ['/timeseries_data', '/blob_features', '/trajectories_data']
+    # search_string = '*_featuresN.hdf5'
+
+    src = Path('/Users/lferiani/Desktop/hydra_example_for_Avelino/Results')
+    dst = Path('/Users/lferiani/Desktop/hydra_example_for_Avelino/foo')
     table_name = ['/timeseries_data', '/blob_features', '/trajectories_data']
     search_string = '*_featuresN.hdf5'
+
 
     extract_table(table_name, src, dst, search_string)
